@@ -54,7 +54,7 @@ const winningScore = 7;
 // Render Everything on Canvas
 function renderCanvas() {
 	// Canvas Background
-	// context.fillStyle = 'black';
+	context.fillStyle = 'black';
 	context.fillRect(0, 0, width, height);
 	// Paddle Color
 	context.fillStyle = 'white';
@@ -213,7 +213,7 @@ function startGame() {
 	computerScore = 0;
 	ballReset();
 	createCanvas();
-	animate();
+	// animate();
 	canvas.addEventListener('mousemove', (e) => {
 		playerMoved = true;
 		// Compensate for canvas being centered
