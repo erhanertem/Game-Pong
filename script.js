@@ -200,6 +200,7 @@ function animate() {
 	ballMove();
 	ballBoundaries();
 	computerAI();
+	window.requestAnimationFrame(animate); // Trigger continous animation of the frame to match screeen refresh rate
 }
 
 // Start Game, Reset Everything
@@ -213,12 +214,12 @@ function startGame() {
 	computerScore = 0;
 	ballReset();
 	createCanvas();
-	// animate();
-	setInterval(animate, 1000 / 60);
+	animate();
+
 	canvas.addEventListener('mousemove', (e) => {
 		playerMoved = true;
 		// Compensate for canvas being centered
-		paddleBottomX = e.clientX - canvasPosition - paddleDiff;
+		paddleBottomX = e.clientX - canvasPosition + 3 * paddleDiff;
 		if (paddleBottomX < paddleDiff) {
 			paddleBottomX = 0;
 		}
