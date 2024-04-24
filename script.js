@@ -1,6 +1,11 @@
 // Canvas
 const { body } = document;
 
+// CREATE A CANVAS HTML ELEMENT
+const canvas = document.createElement('canvas');
+// DEFINE CONTEXT THAT THE CANVAS IS USED FOR
+const context = canvas.getContext('2d');
+
 const width = 500;
 const height = 700;
 const screenWidth = window.screen.width;
