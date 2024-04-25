@@ -188,18 +188,34 @@ function startGame() {
 		if (paddleX[paddleIndex] > width - paddleWidth) {
 			paddleX[paddleIndex] = width - paddleWidth;
 		}
+
+		// Sync paddleX location data with the other opponent
+		// NOTE: Emitter payload carries out this information
+		socket.emit('paddleMove', { xPosition: paddleX[paddleIndex] });
+
 		// Hide Cursor
 		canvas.style.cursor = 'none';
 	});
 }
 
+// Client-event Listener: Listen for 'connect' event broadcast @ start
 socket.on('connect', () => {
 	console.log('Connected as...', socket.id);
 });
 
+// NOTE 👇 Other custom event handlers should be located outside the connect event handler.
+//  Custom Event Listeners
+// Listen for 'startGame' event broadcast
 socket.on('startGame', (refereeId) => {
 	console.log('Referee is', refereeId);
 
 	isReferee = socket.id === refereeId;
 	startGame();
+});
+
+// Listen for 'paddleMove' event broadcast
+socket.on('paddleMove', (paddleMove) => {
+	// Toggle 1 into 0, 0 into 1
+	const opponentPaddleIndex = 1 - paddleIndex;
+	paddleX[opponentPaddleIndex] = paddleData.xPosition;
 });

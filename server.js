@@ -34,9 +34,14 @@ io.on('connection', (socket) => {
 
 		readyPlayerCount++;
 
+		// Broadcast to all clients - sending the second opponent as refree id
 		if (readyPlayerCount === 2) {
-			// Broadcast to all clients - sending the second opponent as refree id
 			io.emit('startGame', socket.id);
 		}
+	});
+
+	// When recieved 'paddleMove' even from FE, boradcasts to other opponent only - exclusivce of the FE emitter opponent
+	socket.on('paddleMove', (paddleData) => {
+		socket.broadcast.emit('paddleMove', paddleData);
 	});
 });
