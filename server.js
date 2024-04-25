@@ -10,7 +10,7 @@
 // 	},
 // });
 // io.listen(PORT);
-// console.log(`Listening on port ${PORT}...`);
+// console.log(`Listening socket.io server on port ${PORT}...`);
 
 // Alternative #2
 const server = require('http').createServer();
@@ -22,7 +22,7 @@ const io = require('socket.io')(server, {
 });
 const PORT = 3000;
 server.listen(PORT);
-console.log(`Listening on port ${PORT}...`);
+console.log(`Listening socket.io server on port ${PORT}...`);
 
 let readyPlayerCount = 0;
 
