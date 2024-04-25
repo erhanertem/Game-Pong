@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
 	});
 
 	// When received 'ballMove' event from FE, broadcast to other opponent only - exclusivce of the FE emitter opponent
-	SocketAddress.on('ballMove', (ballData) => {
+	socket.on('ballMove', (ballData) => {
 		socket.broadcast.emit('ballMove', ballData);
 	});
 });
