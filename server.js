@@ -26,4 +26,14 @@ console.log(`Listening on port ${PORT}...`);
 
 io.on('connection', (socket) => {
 	console.log('a user connected @socketID: ', socket.id);
+
+	socket.on('ready', () => {
+		console.log('Player ready', socket.id);
+
+		readyPlayerCount++;
+
+		if (readyPlayerCount === 2) {
+			//broadcast('startGame')
+		}
+	});
 });
