@@ -8,6 +8,7 @@ const context = canvas.getContext('2d');
 // CREATE FE SOCKET CONNECTION TO BE SOCKET.IO SERVER @ http://localhost:3000
 const socket = io('http://localhost:3000');
 
+let isReferee = false;
 let paddleIndex = 0;
 let width = 500;
 let height = 700;
@@ -165,15 +166,18 @@ function animate() {
 	window.requestAnimationFrame(animate);
 }
 
-// Start Game, Reset Everything
-function startGame() {
+// Load Game
+(function loadGame() {
 	createCanvas();
 	renderIntro();
 	// socket.emit('ready', {...payload goes here - a unique identifier for the socket holder});
 	// NOTE we excluded {payload} via socket.id upon connect event...
 	socket.emit('ready');
+})();
 
-	paddleIndex = 0;
+// Start Game, Reset Everything
+function startGame() {
+	paddleIndex = isReferee ? 0 : 1;
 	window.requestAnimationFrame(animate);
 	canvas.addEventListener('mousemove', (e) => {
 		playerMoved = true;
@@ -189,9 +193,13 @@ function startGame() {
 	});
 }
 
-// On Load
-startGame();
-
 socket.on('connect', () => {
 	console.log('Connected as...', socket.id);
+});
+
+socket.on('startGame', (refereeId) => {
+	console.log('Referee is', refereeId);
+
+	isReferee = socket.id === refereeId;
+	startGame();
 });
