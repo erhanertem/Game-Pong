@@ -40,8 +40,13 @@ io.on('connection', (socket) => {
 		}
 	});
 
-	// When recieved 'paddleMove' even from FE, boradcasts to other opponent only - exclusivce of the FE emitter opponent
+	// When recieved 'paddleMove' event from FE, broadcasts to other opponent only - exclusivce of the FE emitter opponent
 	socket.on('paddleMove', (paddleData) => {
 		socket.broadcast.emit('paddleMove', paddleData);
+	});
+
+	// When received 'ballMove' event from FE, broadcast to other opponent only - exclusivce of the FE emitter opponent
+	SocketAddress.on('ballMove', (ballData) => {
+		socket.broadcast.emit('ballMove', ballData);
 	});
 });
