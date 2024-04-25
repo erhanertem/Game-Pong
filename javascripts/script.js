@@ -229,3 +229,8 @@ socket.on('paddleMove', (paddleMove) => {
 	const opponentPaddleIndex = 1 - paddleIndex;
 	paddleX[opponentPaddleIndex] = paddleData.xPosition;
 });
+
+// Listen for 'paddleMove' event broadcast - Broadcasting referee player do not receive this!!!
+socket.on('ballMove', (ballData) => {
+	({ ballX, ballY, score } = ballData);
+});
