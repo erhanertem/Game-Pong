@@ -35,7 +35,8 @@ io.on('connection', (socket) => {
 		readyPlayerCount++;
 
 		// Broadcast to all clients - sending the second opponent as refree id
-		if (readyPlayerCount === 2) {
+		// IMPORTANT Modula operator guarantees to start a game even if one re-connects after a disconnect
+		if (readyPlayerCount % 2) {
 			io.emit('startGame', socket.id);
 		}
 	});
@@ -48,5 +49,10 @@ io.on('connection', (socket) => {
 	// When received 'ballMove' event from FE, broadcast to other opponent only - exclusivce of the FE emitter opponent
 	socket.on('ballMove', (ballData) => {
 		socket.broadcast.emit('ballMove', ballData);
+	});
+
+	// Listen for Client Socket Disconnects
+	socket.on('disconnect', (reason) => {
+		console.log(`Client ${socket.id} disconnected: ${reason}`);
 	});
 });
