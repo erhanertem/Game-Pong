@@ -208,13 +208,23 @@ function startGame() {
 	});
 }
 
-// Client-event Listener: Listen for 'connect' event broadcast @ start
+// -> Socket.io Built-in Event Listeners
+// Client-event Listeners:
+// Listen for 'connect' event broadcast @start
 socket.on('connect', () => {
 	console.log('Connected as...', socket.id);
 });
+// Listen for socker server disconnect
+socket.on('disconnect', (reason) => {
+	if (reason === 'io server disconnect') {
+		// the disconnection was initiated by the server, you need to reconnect
+		socket.connect();
+	}
+	// else the socket will automatically try to reconnect
+});
 
 // NOTE 👇 Other custom event handlers should be located outside the connect event handler.
-//  Custom Event Listeners
+// -> Custom Event Listeners
 // Listen for 'startGame' event broadcast
 socket.on('startGame', (refereeId) => {
 	console.log('Referee is', refereeId);
