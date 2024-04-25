@@ -33,7 +33,8 @@ io.on('connection', (socket) => {
 		readyPlayerCount++;
 
 		if (readyPlayerCount === 2) {
-			//broadcast('startGame')
+			// Broadcast to all clients - sending the second opponent as refree id
+			io.emit('startGame', socket.id);
 		}
 	});
 });
