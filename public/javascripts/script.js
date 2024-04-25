@@ -6,7 +6,9 @@ const canvas = document.createElement('canvas');
 // DEFINE CONTEXT THAT THE CANVAS IS USED IN
 const context = canvas.getContext('2d');
 // CREATE FE SOCKET CONNECTION TO BE SOCKET.IO SERVER @ http://localhost:3000
-const socket = io('http://localhost:3000');
+// const socket = io('http://localhost:3000');
+// NOTE Since soket.io is hosted on the backend so we do not need to hardcode the server address
+const socket = io();
 
 let isReferee = false;
 let paddleIndex = 0;
