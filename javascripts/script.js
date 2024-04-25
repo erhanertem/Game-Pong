@@ -95,6 +95,9 @@ function ballReset() {
 	ballX = width / 2;
 	ballY = height / 2;
 	speedY = 3;
+
+	// Let the referee emit BallMove event with x/y payload
+	socket.emit('ballMove', { ballX, ballY, score });
 }
 
 // Adjust Ball Movement
@@ -105,6 +108,9 @@ function ballMove() {
 	if (playerMoved) {
 		ballX += speedX;
 	}
+
+	// Let the referee emit BallMove event with x/y payload
+	socket.emit('ballMove', { ballX, ballY, score });
 }
 
 // Determine What Ball Bounces Off, Score Points, Reset Ball
@@ -160,9 +166,13 @@ function ballBoundaries() {
 
 // Called Every Frame
 function animate() {
-	ballMove();
+	// Ball move pos(x,y) in the game is handled only via emitter from the referee
+	if (isReferee) {
+		ballMove();
+		ballBoundaries();
+	}
+
 	renderCanvas();
-	ballBoundaries();
 	window.requestAnimationFrame(animate);
 }
 
@@ -171,7 +181,7 @@ function animate() {
 	createCanvas();
 	renderIntro();
 	// socket.emit('ready', {...payload goes here - a unique identifier for the socket holder});
-	// NOTE we excluded {payload} via socket.id upon connect event...
+	// NOTE we excluded {payload} via socket.id upon connect event...Not necessary to pass a payload anymore
 	socket.emit('ready');
 })();
 
@@ -213,9 +223,9 @@ socket.on('startGame', (refereeId) => {
 	startGame();
 });
 
-// Listen for 'paddleMove' event broadcast
+// Listen for 'paddleMove' event broadcast - Broadcasting referee player do not receive this!!!
 socket.on('paddleMove', (paddleMove) => {
-	// Toggle 1 into 0, 0 into 1
+	// Get the opponents' boradcasted poddleIndex via toggling opponent index  Toggle 1 into 0, 0 into 1
 	const opponentPaddleIndex = 1 - paddleIndex;
 	paddleX[opponentPaddleIndex] = paddleData.xPosition;
 });
