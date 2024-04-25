@@ -224,7 +224,7 @@ socket.on('startGame', (refereeId) => {
 });
 
 // Listen for 'paddleMove' event broadcast - Broadcasting referee player do not receive this!!!
-socket.on('paddleMove', (paddleMove) => {
+socket.on('paddleMove', (paddleData) => {
 	// Get the opponents' boradcasted poddleIndex via toggling opponent index  Toggle 1 into 0, 0 into 1
 	const opponentPaddleIndex = 1 - paddleIndex;
 	paddleX[opponentPaddleIndex] = paddleData.xPosition;
