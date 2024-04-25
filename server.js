@@ -13,7 +13,8 @@
 // console.log(`Listening socket.io server on port ${PORT}...`);
 
 // Alternative #2
-const server = require('http').createServer();
+const api = require('./api');
+const server = require('http').createServer(api);
 const io = require('socket.io')(server, {
 	cors: {
 		origin: '*',
