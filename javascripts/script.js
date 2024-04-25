@@ -5,7 +5,7 @@ const { body } = document;
 const canvas = document.createElement('canvas');
 // DEFINE CONTEXT THAT THE CANVAS IS USED IN
 const context = canvas.getContext('2d');
-// CREATE SOCKET CONNECTION TO SOCKET.IO
+// CREATE FE SOCKET CONNECTION TO BE SOCKET.IO SERVER @ http://localhost:3000
 const socket = io('http://localhost:3000');
 
 let paddleIndex = 0;
@@ -168,7 +168,10 @@ function animate() {
 // Start Game, Reset Everything
 function startGame() {
 	createCanvas();
-	// renderIntro();
+	renderIntro();
+	// socket.emit('ready', {...payload goes here - a unique identifier for the socket holder});
+	// NOTE we excluded {payload} via socket.id upon connect event...
+	socket.emit('ready');
 
 	paddleIndex = 0;
 	window.requestAnimationFrame(animate);
@@ -188,3 +191,7 @@ function startGame() {
 
 // On Load
 startGame();
+
+socket.on('connect', () => {
+	console.log('Connected as...', socket.id);
+});
