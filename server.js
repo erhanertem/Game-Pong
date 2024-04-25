@@ -4,14 +4,22 @@
 // const PORT = 3000;
 // const httpServer = createServer();
 // const io = new Server(httpServer, {
-// 	// options
+// 	cors: {
+// 		origin: '*',
+// 		methods: ['GET', 'POST'],
+// 	},
 // });
 // io.listen(PORT);
 // console.log(`Listening on port ${PORT}...`);
 
 // Alternative #2
 const server = require('http').createServer();
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+	cors: {
+		origin: '*',
+		methods: ['GET', 'POST'],
+	},
+});
 const PORT = 3000;
 server.listen(PORT);
 console.log(`Listening on port ${PORT}...`);
