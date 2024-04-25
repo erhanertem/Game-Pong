@@ -1,8 +1,12 @@
-// Canvas Related
-const canvas = document.createElement('canvas');
-const context = canvas.getContext('2d');
-let paddleIndex = 0;
+// Canvas
+const { body } = document;
 
+// CREATE A CANVAS HTML ELEMENT
+const canvas = document.createElement('canvas');
+// DEFINE CONTEXT THAT THE CANVAS IS USED IN
+const context = canvas.getContext('2d');
+
+let paddleIndex = 0;
 let width = 500;
 let height = 700;
 
@@ -79,7 +83,7 @@ function renderCanvas() {
 	context.fill();
 
 	// Score
-	context.font = '32px Courier New';
+	context.font = '32px JetBrains Mono';
 	context.fillText(score[0], 20, canvas.height / 2 + 50);
 	context.fillText(score[1], 20, canvas.height / 2 - 30);
 }
