@@ -1,7 +1,12 @@
 let readyPlayerCount = 0;
 
 function listen(io) {
-	io.on('connection', (socket) => {
+	// Hosting multiple io sockets within the same pipeline
+	const tetrisNamespace = io.of('/tetris');
+	const pongNamespace = io.of('/pong');
+
+	// Seperation of concern for different namespaces
+	pongNamespace.on('connection', (socket) => {
 		console.log('a user connected @socketID: ', socket.id);
 
 		socket.on('ready', () => {
@@ -12,7 +17,7 @@ function listen(io) {
 			// Broadcast to all clients - sending the second opponent as refree id
 			// IMPORTANT Modula operator guarantees to start a game even if one re-connects after a disconnect
 			if (readyPlayerCount % 2) {
-				io.emit('startGame', socket.id);
+				pongNamespace.emit('startGame', socket.id);
 			}
 		});
 

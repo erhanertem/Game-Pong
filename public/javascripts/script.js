@@ -7,8 +7,12 @@ const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 // CREATE FE SOCKET CONNECTION TO BE SOCKET.IO SERVER @ http://localhost:3000
 // const socket = io('http://localhost:3000');
-// NOTE Since soket.io is hosted on the backend so we do not need to hardcode the server address
-const socket = io();
+// NOTE Since soket.io is hosted on the backend, we do not need to hardcode the server address
+// const socket = io();
+// NOTE By default, io() defaults to io('/') root namespace. Same as const socket = io();
+// const socket = io('/');
+// NOTE For custom namespaces, ex: io('/pong')
+const socket = io('/pong');
 
 let isReferee = false;
 let paddleIndex = 0;
