@@ -23,7 +23,7 @@ Rewritten the entire pong game code aside from how it was implemented in the tut
 - ⚠️ PENDING ISSUE: Keep persistent session IDs to make game state logic resilient to browser refresh on client-side  
 
 
-<img src="./screenshot.webp" width="800px"/>
+<img src="./screenshot.webp" width="1000px"/>
 
 ---
 
