@@ -1,6 +1,14 @@
 {
-	"singleQuote": true,
-	"eslintIntegration": true,
+	"useTabs": true,
 	"tabWidth": 3,
-	"useTabs": true
+	"semi": true,
+	"singleQuote": true,
+	"trailingComma": "es5",
+	"bracketSpacing": true,
+	"arrowParens": "always",
+	"jsxSingleQuote": false,
+	"printWidth": 120,
+	"endOfLine": "lf",
+	"bracketSameLine": false,
+	"embeddedLanguageFormatting": "auto"
 }

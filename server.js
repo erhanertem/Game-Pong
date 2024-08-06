@@ -1,36 +1,26 @@
-// // Alternative #1
-// const { createServer } = require('http');
-// const { Server } = require('socket.io');
-// const PORT = 3000;
-// const httpServer = createServer();
-// const io = new Server(httpServer, {
-// 	cors: {
-// 		origin: '*',
-// 		methods: ['GET', 'POST'],
-// 	},
-// });
-// io.listen(PORT);
-// console.log(`Listening socket.io server on port ${PORT}...`);
-
-// Alternative #2
 const http = require('http');
-const io = require('socket.io');
+const { Server } = require('socket.io');
 
-const apiServer = require('./api');
-// IMPORTANT HAVE NODEJS HTTP SERVER USE EXPRESS API SERVER UNDER THE HOOD WHILE NODEJS HTTP SERVER ACTS AS A BRIDGE BETWEEN SOCKET.IO & EXPRESS.JS
-const httpServer = http.createServer(apiServer);
-const socketServer = io(httpServer, {
+const app = require('./public/app');
+const sockets = require('./sockets');
+
+// > #1.CREATE HTTP/HTTPS SERVER
+// WRAP EXPRESS SERVER WITHIN HTTP SERVER WHICH IS USED WITH THE SOCKETIO
+const httpServer = http.createServer(app);
+
+// > #2.ASSIGN SOCKETIO UNDER NODE HTTP/HTTPS SERVER
+const ioServer = new Server(httpServer, {
 	cors: {
-		origin: '*',
-		methods: ['GET', 'POST'],
+		origin: 'http://localhost:3000',
 	},
 });
 
-const sockets = require('./sockets');
+// > BROADCAST SOCKET.IO VIA HTTPSERVER
+// Listen is just a made-up function to mimic how we listen httpServer. We simply declare the code that is inside the function here!
+sockets.listen(ioServer);
 
-const PORT = 4000;
-httpServer.listen(PORT, () =>
-	console.log(`Listening NODE server on port ${PORT}...`)
-);
-
-sockets.listen(socketServer);
+// > START HTTPSERVER
+const PORT = process.env.PORT || 3000;
+httpServer.listen(PORT, () => {
+	console.log(`Server is running on port ${PORT}`);
+});
