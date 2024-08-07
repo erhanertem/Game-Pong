@@ -11,7 +11,7 @@
 &emsp;
 
 ###### ⚠️Free-tier render services may get throttled leading delayed app loading 
-#### [Pong Game](https://pong-game-erhan-ertem.onrender.com)
+#### [Pong Game](https://game-pong-erhan-ertem.onrender.com)
 
 Rewritten the entire pong game code aside from how it was implemented in the tutorial as more than dual game play had serious problems and logic failures.  
 - Implement a namespace/rooms configuration with socket.io
@@ -22,6 +22,7 @@ Rewritten the entire pong game code aside from how it was implemented in the tut
 - Disconnect of an opponent triggers display of Intro Screen and dials the room into awaiting list till another opponent jumps in.
 - Keep track of global current player count
 - ⚠️ PENDING ISSUE: Keep persistent session IDs to make game state logic resilient to browser refresh on client-side  
+- ⚠️ PENDING ISSUE: Create a webpack setup to bundle front-end and back-end  
 
 
 <img src="./screenshot.webp" width="1000px"/>
