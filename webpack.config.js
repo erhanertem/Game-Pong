@@ -1,26 +1,51 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-	entry: './server.js',
-	output: {
-		filename: 'bundle.js',
-	},
 	mode: 'production',
-	node: false,
+	entry: './src/index.js',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'js/[name].[contenthash:8].js',
+		clean: true,
+	},
+
 	module: {
 		rules: [
 			{
-				test: /\.m?js$/,
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env'], // ensure compatibility with older browsers
-						plugins: ['@babel/plugin-transform-object-assign'], // ensure compatibility with IE 11
+						presets: ['@babel/preset-env', '@babel/preset-react'],
+						plugins: ['@babel/plugin-transform-object-assign'],
 					},
 				},
 			},
 			{
-				test: /\.js$/,
-				loader: 'webpack-remove-debug', // remove "debug" package
+				test: /\.(css|sass|scss)$/,
+				use: ['style-loader', 'css-loader', 'sass-loader'],
+			},
+			{
+				test: /\.(png|jpe?g|ico|svg)$/,
+				type: 'asset',
+				generator: {
+					filename: 'assets/img/[name].[hash:8][ext]',
+				},
+				parser: {
+					dataUrlCondition: {
+						maxSize: 2 * 1024,
+					},
+				},
 			},
 		],
 	},
+
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: './src/index.html',
+			filename: 'index.html',
+		}),
+	],
 };
