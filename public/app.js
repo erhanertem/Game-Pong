@@ -1,4 +1,4 @@
-const express = require('../node_modules/express');
+const express = require('express');
 
 // INITIALIZE EXPRESS SERVER FOR FE
 const app = express();

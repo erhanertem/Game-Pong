@@ -10,7 +10,8 @@
 
 &emsp;
 
-#### [Pong Game](https://pong-game-erhan-ertem.netlify.app)
+###### ⚠️Free-tier render services may get throttled leading delayed app loading 
+#### [Pong Game](https://pong-game-erhan-ertem.onrender.com)
 
 Rewritten the entire pong game code aside from how it was implemented in the tutorial as more than dual game play had serious problems and logic failures.  
 - Implement a namespace/rooms configuration with socket.io
@@ -30,4 +31,3 @@ Rewritten the entire pong game code aside from how it was implemented in the tut
 ![JS](https://img.shields.io/badge/JavaScript-323330?style=square&logo=javascript&logoColor=F7DF1E)
 ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=square&logo=Socket.io&logoColor=white)
 ![ExpressJs](https://img.shields.io/badge/Express.js-000000?style=square&logo=express&logoColor=white)
-![Webpack](https://img.shields.io/badge/Webpack-%238DD6F9.svg?style=square&logo=Webpack&logoColor=black)
