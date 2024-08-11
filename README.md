@@ -13,7 +13,7 @@
 ###### ⚠️Free-tier render services may get throttled leading delayed app loading 
 #### [Pong Game](https://game-pong-erhan-ertem.onrender.com)
 
-Rewritten the entire pong game code aside from how it was implemented in the tutorial as more than dual game play had serious problems and logic failures.  
+Rewritten the entire pong game code aside from how it was implemented in the tutorial as 2+ game play had serious problems and logic failures.  
 - Implement a namespace/rooms configuration with socket.io
 - The socket.io server can handle multiple playrooms. 
 - The core game parameters kept sync in client and server-side.
