@@ -10,7 +10,7 @@
 
 &emsp;
 
-###### ⚠️Free-tier render services may get throttled leading delayed app loading 
+###### ⚠️Free-tier render services may experience throttling, leading to delayed app loading times.
 #### [Pong Game](https://game-pong-erhan-ertem.onrender.com)
 
 Rewritten the entire pong game code aside from how it was implemented in the tutorial as 2+ game play had serious problems and logic failures.  
