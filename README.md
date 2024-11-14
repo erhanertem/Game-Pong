@@ -21,7 +21,7 @@ Rewritten the entire pong game code aside from how it was implemented in the tut
 - Added backend socket disconnect event which can re-use abondoned rooms to avoid room naming clashes, or issue players to awaiting rooms thru server-side state management.
 - Disconnect of an opponent triggers display of Intro Screen and dials the room into awaiting list till another opponent jumps in.
 - Keep track of global current player count
-- ⚠️ PENDING ISSUE: Keep persistent session IDs to make game state logic resilient to browser refresh on client-side  
+- ⚠️ PENDING ISSUE: Keep persistent session IDs to make game state resilient to browser refresh on client-side  
 - ⚠️ PENDING ISSUE: Create a webpack setup to bundle front-end and back-end  
 
 
